@@ -10,8 +10,21 @@ This project is an implementation of the classic game Tic-Tac-Toe with Python. T
 
 The project is organized into a single Python file: `tictactoe.py`. This file contains the TicTacToe class along with its properties and methods. 
 
-Here is a brief overview of the class methods:
+```
+.
+├─ README.md
+├─ requirements.txt
+└─ src
+   ├─ tictactoe.py
+   └─ dashboard.py
+   ```
 
+- `README.md`: This descriptive file
+- `requirements.txt`: Contains all the required modules and libraries needed to run the project
+- `src/tictactoe.py`: Contains the Python program to simulate the Tic Tac Toe game
+- `src/dashboard.py`: The Streamlit application file to display an interactive dashboard
+
+Here is a brief overview of the class methods:
 
 tictactoe.py
 - TicTacToe Class
