@@ -47,6 +47,23 @@ tictactoe.py
 ## Requirements
 
 - Python 3.x installed
+- Streamlit
+
+To install necessary packages, run `pip install -r requirements.txt`.
+
+## Usage
+
+You can play the Tic Tac Toe game simulation by adding the `src` directory to the `PYTHONPATH`:
+
+`export PYTHONPATH=$PYTHONPATH:$(pwd)`
+ 
+ and running:
+
+`python src/tictactoe.py`
+
+To start the Streamlit dashboard, run:
+
+`streamlit run src/dashboard.py`
 
 ## Hints
 
@@ -56,4 +73,4 @@ tictactoe.py
 - Use a Python set to represent the remaining valid cells.
 - Use the magic method str to return the string representation of the game board state.
 
-## 
+ 
