@@ -30,7 +30,11 @@ To install necessary packages, run `pip install -r requirements.txt`.
 
 ## Usage
 
-You can play the Monty Hall game simulation by adding the `src` directory to the `PYTHONPATH` and running:
+You can play the Monty Hall game simulation by adding the `src` directory to the `PYTHONPATH`:
+
+`export PYTHONPATH=$PYTHONPATH:$(pwd)`
+ 
+ and running:
 
 `python src/monty_hall.py`
 
