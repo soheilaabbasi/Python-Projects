@@ -18,7 +18,7 @@ class TicTacToe:
 
         :return: A string indicating which player goes first ('x' or 'O').  
         """
-        return random.choice(['x' , 'O'])
+        return random.choice(['X' , 'O'])
 
     
     def show_board(self) -> None:
@@ -33,10 +33,10 @@ class TicTacToe:
         print(self.board[7] + '|' + self.board[8] + '|' + self.board[9])
         print('\n')
 
-    def swap_player_turn(self) -< str:
+    def swap_player_turn(self) -> str:
         """  
         Swap the turn from the current player to the other.
-        
+
         :return: A string indicating which player's turn is next ('x' or 'O').
         """
         self.player_turn = 'X' if self.player_turn == 'O' else 'O'
