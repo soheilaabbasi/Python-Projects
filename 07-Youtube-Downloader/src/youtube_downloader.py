@@ -1,7 +1,9 @@
 from pytubefix import YouTube
 from pathlib import Path
 import subprocess
-
+import time
+# from time import sleep
+from tqdm import tqdm
 
 class YouTubeDownloader:
     def __init__(self, url, output_path=None, quality=None):
@@ -11,27 +13,11 @@ class YouTubeDownloader:
         self.yt = YouTube(self.url, on_progress_callback=self.on_progress
                           , on_complete_callback=self.on_complete)
 
-    def on_progress(self, stream, chunk, bytes_remaining):
-        total_size = stream.filesize
-        bytes_downloaded = total_size - bytes_remaining
-
-        print(
-            f"\r('downloading...':<15)"
-            f"{(100*(total_size-bytes_remaining)/total_size):>3.0f}% "
-            f"| {bytes_downloaded/1024/1024:>5.1f}MB"
-            f" of {total_size/1024/1024:>5.1f}MB "
-            f"| {'finished':<10}",
-            end=''
-        )
-
-
-    def on_complete(self, stream, file_path):
-        print()
-        print(f"Download complete. File saved to: {file_path}")
-
 
     def download(self):
-        # Download video
+
+        # Find video stream
+
         if self.quality == 'highest':
             video_stream = (self.yt.streams.filter(
                 progressive=False, 
@@ -49,6 +35,8 @@ class YouTubeDownloader:
             )
 
         # Download audio
+        # Find audio stream
+
         audio_stream = (
             self.yt.streams
             .filter(
@@ -61,20 +49,52 @@ class YouTubeDownloader:
         )
 
 
+
         if video_stream is None or audio_stream is None:
             print("Video or audio stream not found.")
             return
+
+        # -------------------------
+        # Download video
+        # -------------------------
+
+        self.pbar = tqdm(
+                    desc='Downloading video...',
+                    total=video_stream.filesize,
+                    unit='B',
+                    unit_scale=True,
+                    unit_divisor=1024
+                    )
 
         video_file = video_stream.download(
             output_path=self.output_path,
             filename="video.mp4"
         )
 
+        self.pbar.close()
+
+        # -------------------------
+        # Download audio
+        # -------------------------
+
+        self.pbar = tqdm(
+                    desc='Downloading audio...',
+                    total=audio_stream.filesize,
+                    unit='B',
+                    unit_scale=True,
+                    unit_divisor=1024
+                    )
+
         audio_file = audio_stream.download(
             output_path=self.output_path,
             filename="audio.mp4"
         )
 
+        self.pbar.close()
+
+        # -------------------------
+        # Merge video + audio
+        # -------------------------
 
         # after getting the video and audio seperately, 
         # now we combine two files and make final video that has sound.
@@ -92,13 +112,30 @@ class YouTubeDownloader:
             str(final_file)
         ]
 
-        subprocess.run(command, check=True)
+        subprocess.run(
+            command, 
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+            )
 
+        # -------------------------
         # Delete temporary files
+        # -------------------------
+
         Path(video_file).unlink()
         Path(audio_file).unlink()
 
         print(f"Download completed: {final_file}")
+
+
+    def on_progress(self, stream, chunk, bytes_remaining):
+        current = stream.filesize - bytes_remaining
+        self.pbar.update(current - self.pbar.n)     # (the current place that I should be) - (the place that I have gone in progress bar till now)
+        
+    
+    def on_complete(self, stream, file_path):
+        pass
 
 
 
