@@ -23,6 +23,7 @@ Modern YouTube videos often provide high-resolution video and audio as separate 
 
 For example:
 
+```
 YouTube
    │
    ├── Video Stream ───► video.mp4
@@ -34,6 +35,7 @@ YouTube
           │
           ▼
      final_video.mp4
+     ```
 
 The application:
 
@@ -113,6 +115,7 @@ __3. Install dependencies__
 
 The project structure is:
 
+```
 07-Youtube-Downloader/
 │
 ├── images/
@@ -122,6 +125,7 @@ The project structure is:
 │
 ├── README.md
 └── requirements.txt
+```
 
 
 ## Usage
