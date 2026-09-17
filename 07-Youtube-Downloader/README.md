@@ -35,7 +35,10 @@ YouTube
           │
           ▼
      final_video.mp4
-     ```
+
+```
+
+
 
 The application:
 
