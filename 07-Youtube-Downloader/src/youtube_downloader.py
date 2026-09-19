@@ -1,17 +1,24 @@
-from pytubefix import YouTube
-from pathlib import Path
+import argparse
 import subprocess
 import time
-# from time import sleep
+
+from pathlib import Path
+
+from pytubefix import YouTube
+
 from tqdm import tqdm
+
+# from time import sleep
+
 
 class YouTubeDownloader:
     def __init__(self, url, output_path=None, quality=None):
         self.url = url
         self.output_path = output_path or Path().cwd()
         self.quality = quality or 'highest'
-        self.yt = YouTube(self.url, on_progress_callback=self.on_progress
-                          , on_complete_callback=self.on_complete)
+        self.yt = YouTube(self.url, 
+                          on_progress_callback=self.on_progress,
+                          on_complete_callback=self.on_complete)
 
 
     def download(self):
@@ -140,6 +147,20 @@ class YouTubeDownloader:
 
 
 if __name__ == '__main__':
-    url = input("Enter a youtube url:")
-    YouTubeDownloader(url).download()
+    parser = argparse.ArgumentParser(
+        description='YouTube Downloader'
+    )
+    parser.add_argument('url', help='YouTube video URL') # if it hasn't - means it is mandatory.
+    parser.add_argument('-q', '--quality', help='Video quality', default='highest')
+    parser.add_argument('-o', '--output_path', help='Output path', default=None)
+
+    args = parser.parse_args()
+
+    
+    # url = input("Enter a youtube url:")
+    YouTubeDownloader(
+        url=args.url,
+        quality=args.quality,
+        output_path=args.output_path
+    ).download()
     
