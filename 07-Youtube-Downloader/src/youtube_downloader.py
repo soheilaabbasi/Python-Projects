@@ -1,13 +1,18 @@
 import argparse
 import subprocess
-import time
 
 from pathlib import Path
 
 from pytubefix import YouTube
+from pytubefix.exceptions import VideoUnavailable
 
 from tqdm import tqdm
 
+# import pytube.exceptions
+# from pytube.exceptions import PytubeError
+# from pytube.exceptions import VideoUnavailable
+
+# import time
 # from time import sleep
 
 
@@ -16,12 +21,23 @@ class YouTubeDownloader:
         self.url = url
         self.output_path = output_path or Path().cwd()
         self.quality = quality or 'highest'
-        self.yt = YouTube(self.url, 
-                          on_progress_callback=self.on_progress,
-                          on_complete_callback=self.on_complete)
+        self.yt = None
 
 
     def download(self):
+
+        self.yt = YouTube(
+            self.url, 
+            on_progress_callback=self.on_progress,
+            on_complete_callback=self.on_complete
+            )
+
+        try:
+            self.yt.check_availability()
+        except VideoUnavailable:
+            print("Video is unavailable.")
+            return
+
 
         # Find video stream
 
@@ -134,6 +150,15 @@ class YouTubeDownloader:
         Path(audio_file).unlink()
 
         print(f"Download completed: {final_file}")
+
+    # except VideoUnavailable:
+    #     print("Video '{self.url}'is unavailable, " \
+    #     "try checking the url in your browser.")
+    #     exit(1)
+
+    # except Exception as e:
+    #     print(f"An unexpected error occurred: {e}")
+    #     exit(1)
 
 
     def on_progress(self, stream, chunk, bytes_remaining):
