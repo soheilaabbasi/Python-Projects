@@ -207,9 +207,7 @@ The application provides the following command-line arguments:
 |Argument|	Description|	Default|
 |--|--|--|
 |`url`|	YouTube video URL|	Required|
-|--|--|--|
 |`-q`, `--quality`|	Video resolution, such as `720p`|	`highest`|
-|--|--|--|
 |`-o`, `--output_path`|	Directory where the files will be saved|	Current directory|
 
 
