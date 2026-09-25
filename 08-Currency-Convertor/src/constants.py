@@ -17,3 +17,22 @@ CURRENCIES = [
     'UZS', 'VES', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XCG', 'XDR', 'XOF',
     'XPF', 'YER', 'ZAR', 'ZMW', 'ZWG', 'ZWL'
 ]
+
+CURRENCY_INFO = {
+    "USD": {"name": "US Dollar", "symbol": "$"},
+    "EUR": {"name": "Euro", "symbol": "€"},
+    "GBP": {"name": "British Pound", "symbol": "£"},
+    "JPY": {"name": "Japanese Yen", "symbol": "¥"},
+    "CNY": {"name": "Chinese Yuan", "symbol": "¥"},
+    "CAD": {"name": "Canadian Dollar", "symbol": "C$"},
+    "AUD": {"name": "Australian Dollar", "symbol": "A$"},
+    "CHF": {"name": "Swiss Franc", "symbol": "CHF"},
+    "INR": {"name": "Indian Rupee", "symbol": "₹"},
+    "TRY": {"name": "Turkish Lira", "symbol": "₺"},
+    "AED": {"name": "UAE Dirham", "symbol": "د.إ"},
+    "SAR": {"name": "Saudi Riyal", "symbol": "﷼"},
+    "KRW": {"name": "South Korean Won", "symbol": "₩"},
+    "BRL": {"name": "Brazilian Real", "symbol": "R$"},
+    "RUB": {"name": "Russian Ruble", "symbol": "₽"},
+    "ZAR": {"name": "South African Rand", "symbol": "R"},
+}
