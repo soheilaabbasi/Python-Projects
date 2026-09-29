@@ -17,6 +17,3 @@ def call_ollama(model, prompt, stream=False):
     else:
         return f'Error: {response.status_code}'
 
-
-
-    
