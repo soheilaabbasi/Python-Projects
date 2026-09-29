@@ -1,3 +1,4 @@
+![alt text](images/chatbot01.jpg)
 # 🦙 Ollama Chatbot with Streamlit & Ollama
 
 A simple and interactive AI chatbot built with **Python**, **Streamlit**, and **Ollama**.
