@@ -30,7 +30,7 @@ The chatbot uses a locally running Large Language Model (LLM) to generate respon
 ## 📁 Project Structure
 
 ```text
-12-ChatBot/
+ChatBot/
 │
 ├── src/
 │   ├── app.py
